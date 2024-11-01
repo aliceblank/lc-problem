@@ -20,3 +20,26 @@ var longestConsecutive = function(nums) {
   }
   return max;
 };
+
+// O(n)
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestConsecutive = function(nums) {
+  let map = {}
+  let max = 0;
+  for (let num in nums) {
+      map[nums[num]] = true;
+  }
+  for (let idx in nums) {
+      if (!map[nums[idx] - 1]) {
+          let sequence = 1;
+          while (map[nums[idx] + sequence]) {
+              sequence++;
+          }
+          max = Math.max(sequence, max)
+      }
+  }
+  return max;
+};
